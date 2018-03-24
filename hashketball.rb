@@ -4,9 +4,9 @@ def game_hash()
     home: {
       team_name: "Brooklyn Nets",
       colors: ["Black", "White"],
-      players: [
-        {
-          player_name: "Alan Anderson",
+      players: {
+        
+          "Alan Anderson" => {
           number: 0,
           shoe: 16,
           points: 22,
@@ -15,8 +15,8 @@ def game_hash()
           steals: 3,
           blocks: 1,
           slam_dunks: 1
-        }, {
-          player_name: "Reggie Evans",
+        },
+          "Reggie Evans" => {
           number: 30,
           shoe: 14,
           points: 12,
@@ -25,8 +25,8 @@ def game_hash()
           steals: 12,
           blocks: 12,
           slam_dunks: 7
-        }, {
-          player_name: "Brook Lopez",
+        },
+          "Brook Lopez" => {
           number: 11,
           shoe: 17,
           points: 17,
@@ -35,8 +35,8 @@ def game_hash()
           steals: 3,
           blocks: 1,
           slam_dunks: 15
-        }, {
-          player_name: "Mason Plumlee",
+        },
+          "Mason Plumlee" => {
           number: 1,
           shoe: 19,
           points: 26,
@@ -45,8 +45,8 @@ def game_hash()
           steals: 3,
           blocks: 8,
           slam_dunks: 5
-        }, {
-          player_name: "Jason Terry",
+        },
+          "Jason Terry" => {
           number: 31,
           shoe: 15,
           points: 19,
@@ -56,14 +56,14 @@ def game_hash()
           blocks: 11,
           slam_dunks: 1
         }
-      ]
+      }
     },
     away: {
       team_name: "Charlotte Hornets",
       colors: ["Turquoise", "Purple"],
-      players: [
+      players: 
         {
-          player_name: "Jeff Adrien",
+          "Jeff Adrien" => {
           number: 4,
           shoe: 18,
           points: 10,
@@ -72,8 +72,8 @@ def game_hash()
           steals: 2,
           blocks: 7,
           slam_dunks: 2
-        }, {
-          player_name: "Bismak Biyombo",
+        }, 
+          "Bismak Biyombo" => {
           number: 0,
           shoe: 16,
           points: 12,
@@ -82,8 +82,8 @@ def game_hash()
           steals: 7,
           blocks: 15,
           slam_dunks: 10
-        }, {
-          player_name: "DeSagna Diop",
+        }, 
+          "DeSagna Diop" => {
           number: 2,
           shoe: 14,
           points: 24,
@@ -92,8 +92,8 @@ def game_hash()
           steals: 4,
           blocks: 5,
           slam_dunks: 5
-        }, {
-          player_name: "Ben Gordon",
+        }, 
+          "Ben Gordon" => {
           number: 8,
           shoe: 15,
           points: 33,
@@ -102,8 +102,8 @@ def game_hash()
           steals: 1,
           blocks: 1,
           slam_dunks: 0
-        }, {
-          player_name: "Brendan Haywood",
+        }, 
+          "Brendan Haywood" => {
           number: 33,
           shoe: 15,
           points: 6,
@@ -113,19 +113,89 @@ def game_hash()
           blocks: 5,
           slam_dunks: 12
         }
-      ]
+      
     }
   }
-  
+ }
 end
 
 def num_points_scored(name)
   game_hash.each do |teamAff, teamAffData|
     teamAffData[:players].each do |pName, stats|
-      if pName = name
+      if pName == name
         return stats[:points]
       end
+    end
   end
+  
+end
+
+def shoe_size(size)
+  game_hash.each do |teamAff, teamAffData|
+    teamAffData[:players].each do |pName, stats|
+      if pName == size
+        return stats[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors(team)
+   game_hash.each do |teamAff, teamAffData|
+     if teamAffData[:team_name] == team
+       return teamAffData[:colors]
+     end
+   end
+end
+
+def team_names()
+  result = []
+  game_hash.each do |teamAff, teamAffData|
+    result << teamAffData[:team_name]
+  end
+  return result
+end
+
+def player_numbers(team)
+  result = []
+  game_hash.each do |teamAff, teamAffData|
+    if teamAffData[:team_name] == team
+      teamAffData[:players].each do |key, val|
+        result << val[:number]
+      end
+   end
+  end
+  return result
+end
+
+def big_shoe_rebounds()
+  max = 0
+  result = 0
+  game_hash.each do |teamAff, teamAffData|
+
+    teamAffData[:players].each do |key, val|
+      if val[:shoe] >= max
+        max = val[:shoe]
+        result = val[:rebounds]
+      end
+    end
+
+  end
+  
+  return result
+end
+
+def player_stats(player)
+  game_hash.each do |teamAff, teamAffData|
+
+    teamAffData[:players].each do |key, val|
+      if key == player
+        return val
+      end
+    end
+
+  end
+
 end
 
 ## data
