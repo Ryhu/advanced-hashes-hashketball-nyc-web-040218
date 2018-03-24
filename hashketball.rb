@@ -116,11 +116,26 @@ def game_hash()
       ]
     }
   }
+  
 end
 
+def num_points_scored(name)
+  game_hash.each do |teamAff, teamAffData|
+    teamAffData[:players].each do |pName, stats|
+      if pName = name
+        return stats[:points]
+      end
+  end
+end
 
-
-
+## data
+##  -home
+##    -t-name
+##    -colors
+##    -players
+##      -name
+##        -stats
+##  -away
 
 
 
